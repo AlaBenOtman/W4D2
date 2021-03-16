@@ -1,6 +1,6 @@
 class Employee #superclass / parent class
 
-    def initialize(name, title, salary, boss)
+    def initialize(name, title, salary, boss=nil)
         @name = name
         @title = title
         @salary = salary
@@ -11,6 +11,11 @@ class Employee #superclass / parent class
         bonus = @salary * multiplier
     end
 
-    
+    def boss=(manager) #######
+        if !@boss.nil?
+            @boss.employees << self
+        end
+
+    end
 
 end

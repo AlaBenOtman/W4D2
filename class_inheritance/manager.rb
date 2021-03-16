@@ -4,16 +4,22 @@ class Manager < Employee
 
     def initialize(name, title, salary, boss, employees)
         super(name, title, salary, boss)
-        @employees = employees #employees arg is an array of employee instances
+        @employees = [] #employees arg is an array of employee instances
     end
 
     def bonus(multiplier)
         total_salary = 0
 
         @employees.each do |employee|
-            
+            if employee.title == "Founder" || employee.title == "TA Manager"
+                total_salary += employee.bonus(multiplier)
+            else 
+                total_salary += employee.salary
+            end
         end
     end
+
+     
 
 end
 
