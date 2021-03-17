@@ -24,21 +24,22 @@ module Slideable
     end
 
     def moves 
-        #assumed #move_dirs is an array with directions 
+        
         moves = []
 
-        #need to check each piece's move_dirs before loop:
-
-        HORIZONTAL_DIRS.each do |h_dir|
-            moves << grow_unblocked_moves_in_dir(*h_dir) #method call
-
+        if self.move_dirs.include?("horizontal")
+            HORIZONTAL_DIRS.each do |h_dir|
+                moves << grow_unblocked_moves_in_dir(*h_dir) 
         end
-        
-        DIAGONAL_DIRS.each do |d_dir|
-            moves << grow_unblocked_moves_in_dir(*d_dir)
+
+        if self.move_dirs.include?("diagonal")
+            DIAGONAL_DIRS.each do |d_dir|
+                moves << grow_unblocked_moves_in_dir(*d_dir)
         end
         moves
     end
+
+    
     
     private
     def grow_unblocked_moves_in_dir(dx, dy) #method definition
