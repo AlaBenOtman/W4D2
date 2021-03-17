@@ -5,16 +5,22 @@ class Board
     attr_reader :rows, :piece
     def initialize
         @rows = Array.new(8){Array.new(8)}
-        # @null_piece = NullPiece.new()
-        @piece = Piece.new
+        @null_piece = NullPiece.new
+        # @piece = Piece.new
         initialize_board
     end
 
     def initialize_board
         @rows.each_with_index do |row, i|
-            if i == 0 || i == 1 || i == 6 || i == 7
+            if i == 0 || i == 1 
+                 
+            elsif i == 6 || i == 7
                 row.each_with_index do |ele, j|
                     self[[i,j]] = "5"
+                end
+            else 
+                row.each_with_index do |ele, j|
+                    self[[i,j]] = @null_piece
                 end
             end
         end
@@ -37,8 +43,8 @@ class Board
     def move_piece(start_pos, end_pos)
         if self[start_pos].nil? 
             raise "There is no piece at #{start_pos} "
-        # elsif !valid_pos?(end_pos)
-        #     raise "The piece can not move to #{end_pos}"
+        elsif !valid_pos?(end_pos)
+            raise "The piece can not move to #{end_pos}"
         else 
             piece = self[start_pos]
             self[start_pos] = nil 

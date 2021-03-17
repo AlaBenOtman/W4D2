@@ -25,14 +25,8 @@ module Slideable
 
     def moves 
         moves = []
-        if self.move_dirs.include?("horizontal")
-            HORIZONTAL_DIRS.each do |h_dir|
-                moves << grow_unblocked_moves_in_dir(*h_dir) 
-        end
-
-        if self.move_dirs.include?("diagonal")
-            DIAGONAL_DIRS.each do |d_dir|
-                moves << grow_unblocked_moves_in_dir(*d_dir)
+        move_dirs.each do |dir|
+                moves << grow_unblocked_moves_in_dir(*dir)
         end
         moves
     end

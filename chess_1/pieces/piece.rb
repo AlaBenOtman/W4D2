@@ -7,6 +7,18 @@ class Piece
         @pos = pos
     end
 
+    def to_s
+
+    end
+
+    # def pos=(val)
+
+    # end
+
+    def valid_moves 
+        
+    end
+
     
 
 
