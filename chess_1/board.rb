@@ -30,6 +30,10 @@ class Board
         @rows[row][col] = val
     end
 
+    def valid_pos?(pos)
+        (pos[0] < 7 && pos[0] > 0 ) && (pos[1] < 7 && pos[1] > 0 )
+    end
+
     def move_piece(start_pos, end_pos)
         if self[start_pos].nil? 
             raise "There is no piece at #{start_pos} "
