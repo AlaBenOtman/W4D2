@@ -12,7 +12,7 @@ class Rook < Piece
     protected 
 
     def move_dirs 
-        return ["horizontal"]
+        horizontal_dirs
     end
 
 end

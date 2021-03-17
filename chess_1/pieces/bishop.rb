@@ -12,7 +12,6 @@ class Bishop < Piece
     protected 
 
     def move_dirs 
-        # return ["diagonal"] #check
         diagonal_dirs
     end
 

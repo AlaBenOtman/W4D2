@@ -39,7 +39,7 @@ class Pawn < Piece
         if self.at_start_row?
             2.times do 
                 curr_pos[0] += dir
-                if curr_piece != nil
+                if curr_piece.color == nil
                     break
                 else
                     forward_moves << curr_pos.dup
@@ -47,7 +47,7 @@ class Pawn < Piece
             end
         else
             curr_pos[0] += dir
-            forward_moves << curr_pos.dup unless curr_piece != nil
+            forward_moves << curr_pos.dup unless curr_piece.color != nil
         end
         forward_moves
     end

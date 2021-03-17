@@ -7,7 +7,7 @@ module Stepable
             curr_pos[0] += diffs[0]
             curr_pos[1] += diffs[1]
             curr_piece = self.board[curr_pos] 
-            curr_piece == nil || curr_piece.color != self.color
+            curr_piece.color == nil || curr_piece.color != self.color
         end
     end
 

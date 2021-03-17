@@ -1,14 +1,14 @@
 require 'byebug'
 module Slideable
 
-    HORIZONTAL_DIRS: [
+    HORIZONTAL_DIRS = [
         [ 0, -1 ], #left
         [ 0, 1 ], #right
         [ -1, 0 ], #up (vertical)
         [ 1, 0 ] #down (vertical)
     ].freeze
     
-    DIAGONAL_DIRS: [
+    DIAGONAL_DIRS = [
         [ -1, -1 ],  #up + left
         [ -1, 1 ],  #up + right
         [ 1, -1 ],  # down + left
@@ -26,7 +26,7 @@ module Slideable
     def moves 
         moves = []
         move_dirs.each do |dir|
-                moves << grow_unblocked_moves_in_dir(*dir)
+            moves << grow_unblocked_moves_in_dir(*dir)
         end
         moves
     end
@@ -42,7 +42,7 @@ module Slideable
             curr_pos[0] += dx
             curr_pos[1] += dy
             curr_piece = self.board[curr_pos] 
-            if current_piece == nil #empty - change to nullpiece later
+            if current_piece.color == nil #empty - change to nullpiece later
                 dir_moves << curr_pos.dup
             else
                 curr_piece.color != self.color ? dir_moves << curr_pos.dup : break

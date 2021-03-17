@@ -1,22 +1,61 @@
 require "byebug"
-require_relative "./piece.rb"
+require_relative "./pieces/king.rb"
+require_relative "./pieces/queen.rb"
+require_relative "./pieces/knight.rb"
+require_relative "./pieces/bishop.rb"
+require_relative "./pieces/rook.rb"
+require_relative "./pieces/pawn.rb"
+require_relative "./pieces/null_piece.rb"
+
 class Board 
 
     attr_reader :rows, :piece
     def initialize
         @rows = Array.new(8){Array.new(8)}
         @null_piece = NullPiece.new
-        # @piece = Piece.new
         initialize_board
     end
 
     def initialize_board
         @rows.each_with_index do |row, i|
-            if i == 0 || i == 1 
-                 
-            elsif i == 6 || i == 7
+            case i
+            when 0 #black
                 row.each_with_index do |ele, j|
-                    self[[i,j]] = "5"
+                    case j
+                    when 0 || 7
+                        self[[i,j]] = Rook.new(:black, @rows, [i,j])
+                    when 1 || 6
+                        self[[i,j]] = Knight.new(:black, @rows, [i,j])
+                    when 2 || 5
+                        self[[i,j]] = Bishop.new(:black, @rows, [i,j])
+                    when 3 
+                        self[[i,j]] = King.new(:black, @rows, [i,j])
+                    when 4 
+                        self[[i,j]] = Queen.new(:black, @rows, [i,j])
+                    end
+                end
+            when 1 #black 
+                row.each_with_index do |ele, j|
+                    self[[i,j]] = Pawn.new(:black, @rows, [i,j])
+                end
+            when 6 #white
+                row.each_with_index do |ele, j|
+                    self[[i,j]] = Pawn.new(:white, @rows, [i,j])
+                end
+            when 7 #white
+                row.each_with_index do |ele, j|
+                    case j
+                    when 0 || 7
+                        self[[i,j]] = Rook.new(:black, @rows, [i,j])
+                    when 1 || 6
+                        self[[i,j]] = Knight.new(:black, @rows, [i,j])
+                    when 2 || 5
+                        self[[i,j]] = Bishop.new(:black, @rows, [i,j])
+                    when 3 
+                        self[[i,j]] = King.new(:black, @rows, [i,j])
+                    when 4 
+                        self[[i,j]] = Queen.new(:black, @rows, [i,j])
+                    end
                 end
             else 
                 row.each_with_index do |ele, j|
@@ -41,26 +80,29 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
-        if self[start_pos].nil? 
+        if self[start_pos].color == nil? 
             raise "There is no piece at #{start_pos} "
         elsif !valid_pos?(end_pos)
             raise "The piece can not move to #{end_pos}"
         else 
             piece = self[start_pos]
-            self[start_pos] = nil 
+            self[start_pos].color == nil 
             self[end_pos] = piece
             #need to update pos attribute on each piece instance
         end
     end
 
+    def inspect
+    
+    end  
 
 end
 
 new_board = Board.new
 
-new_board.move_piece([1,1], [2,1])
 
-p new_board.rows
+p new_board
+
 
 #[+1,-1] [+1,+1][-1,+1] [-1,-1]
 
